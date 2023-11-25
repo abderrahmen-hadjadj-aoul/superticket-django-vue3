@@ -2,3 +2,5 @@
 source = .
 omit =
    manage.py
+   api/asgi.py
+   api/wsgi.py
