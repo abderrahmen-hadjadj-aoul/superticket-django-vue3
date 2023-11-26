@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import Card from 'primevue/card'
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
 
 const router = useRouter()
 
@@ -22,15 +25,36 @@ async function login() {
 </script>
 
 <template>
-  <main>
-    <div v-if="hasWrongPassword" data-test="login-message">Wrong password</div>
-    <div v-else class="login" data-test="login">
-      <h1 data-test="login-title">Login</h1>
-      <form>
-        <input v-model="credentials.username" data-test="username" type="text" />
-        <input v-model="credentials.password" data-test="password" type="password" />
-        <button @click.prevent="login" data-test="button-login">Login</button>
-      </form>
-    </div>
+  <main class="flex flex-column align-items-center justify-content-center w-full h-full">
+    <h1>SuperTicket</h1>
+    <Card class="w-24rem">
+      <template #content>
+        <div v-if="hasWrongPassword" data-test="login-message">Wrong password</div>
+        <div v-else class="login" data-test="login">
+          <h1 data-test="login-title">Login</h1>
+          <form>
+            <div class="flex flex-column gap-2">
+              <label for="username">Username</label>
+              <InputText
+                v-model="credentials.username"
+                id="username"
+                data-test="username"
+                type="text"
+              />
+            </div>
+            <div class="flex flex-column gap-2 mt-3">
+              <label for="password">Password</label>
+              <InputText
+                v-model="credentials.password"
+                id="password"
+                data-test="password"
+                type="password"
+              />
+            </div>
+            <Button @click.prevent="login" data-test="button-login" class="mt-3">Login</Button>
+          </form>
+        </div>
+      </template>
+    </Card>
   </main>
 </template>
