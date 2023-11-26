@@ -22,3 +22,12 @@ test('Login with correct password', async ({ page }) => {
   await login(page, 'test', 'test')
   await expect(select(page, 'main-title')).toHaveText('Dashboard')
 })
+
+test('Create ticket', async ({ page }) => {
+  await page.goto('/')
+  await login(page, 'test', 'test')
+  await select(page, 'ticket-title').fill('Cook for diner')
+  await select(page, 'ticket-description').fill('Cook chicken and french fries')
+  await select(page, 'ticket-button-create').click()
+  await expect(select(page, 'ticket-message')).toHaveText('Ticket created')
+})
